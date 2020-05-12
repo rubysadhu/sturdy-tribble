@@ -2,7 +2,7 @@
   <div>
     <nuxt />
     <footer>
-        <div class="bg-white">
+        <div >
             <div class="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
                 <div class="mt-8 flex justify-center">
                     <a href="#" class="text-gray-400 hover:text-gray-500">
