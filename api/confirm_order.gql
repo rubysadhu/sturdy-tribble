@@ -1,0 +1,5 @@
+mutation confirmOrder($ID: Int) {
+  update_pickup_orders(where: {id: {_eq: $ID}}, _set: {confirmed: true}) {
+    affected_rows
+  }
+}

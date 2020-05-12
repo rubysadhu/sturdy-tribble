@@ -1,0 +1,21 @@
+subscription getOrderByID( $ID: Int! ) {
+  pickup_orders(where: {id: {_eq: $ID}}) {
+    customer_name
+    customer_phone_number
+    confirmed
+    completed
+    order_items {
+      menu_item {
+        name
+        description
+        price
+      }
+      notes
+    }
+    order_items_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+}

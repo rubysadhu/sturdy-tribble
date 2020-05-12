@@ -52,22 +52,41 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    {
+      src: '~/plugins/animation'
+    }
+  ],
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [// Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'],
+  buildModules: [ // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
+    '@nuxtjs/tailwindcss' ],
   /*
   ** Nuxt.js modules
   */
-  modules: [// Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'],
+  modules: [ // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/axios',
+    '@nuxtjs/apollo' ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: "https://hasura-3udj.onrender.com/v1/graphql",
+        wsEndpoint: 'wss://hasura-3udj.onrender.com/v1/graphql',
+        opts: {
+          headers: {
+            'x-hasura-admin-secret': "soupnazi"
+          }
+        }
+      }
+    }
+  },
 
   server: {
     port: 8484
