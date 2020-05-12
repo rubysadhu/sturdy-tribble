@@ -1,0 +1,11 @@
+query GetMenuItems {
+  categories {
+    name
+    menus {
+      name
+      price
+      description
+      id
+    }
+  }
+}
