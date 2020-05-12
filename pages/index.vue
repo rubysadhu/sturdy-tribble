@@ -55,16 +55,19 @@
     </div>
 
     <div id="sidebar" class="bg-white shadow border-l p-4">
-      <h4 class="font-bold mb-4">Summary:</h4>
+      <h4 class="font-bold text-xl border-b mb-3 pb-3 border-gray-200">Your Order</h4>
  
-      <div id="summary" v-for="item in summary">
-        <span>{{item.name}}</span>
+      <div class="border-b mb-3 pb-3 border-gray-200" v-for="(item, index) in summary">
+        <span class="font-medium">{{item.name}}</span>
+        <span @click="removeItem(index)" class="float-right py-1 px-2 bg-gray-600 text-white rounded-full ml-2 cursor-pointer hover:bg-gray-700" style="font-size: .65rem;"><i class="fas fa-times"></i></span>
         <span class="float-right">${{item.price}}</span>
-        <p class="ml-2 text-xs">{{item.notes}}</p>
+        <p v-if="item.notes" class="ml-5 text-xs text-gray-500 italic">"{{item.notes}}"</p>
       </div>
-      <hr class="my-3">
-      <div class="font-bold text-sm">Food &amp; Beverage Total: ${{totalSummary}}</div>
+
+      <div style="position: fixed;bottom: 75px;width: 270px;">
+        <div class="font-bold text-sm">Food &amp; Beverage Total <span class="float-right">${{totalSummary}}</span></div>
       <small class="block text-gray-500">* HST included</small>
+      </div>
 
       <button @click="completeOrder=true" type="button" style="position: fixed; bottom: 10px; width: 270px;" class="w-full font-bold inline-flex items-center justify-center px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
         CHECKOUT
@@ -115,6 +118,9 @@ export default {
       this.closeModals()
       this.notes = ''
     },
+    removeItem(index) {
+      this.summary.splice(index, 1)
+    },
     closeModals() {
       this.completeOrder = false
       this.showProductInfo = false
@@ -124,13 +130,40 @@ export default {
         "name": item.name,
         "description": item.description,
         "price": item.price,
-        "notes": item.notes
+        "notes": item.notes,
+        "id": item.id
       }
       this.currentProduct = product
       this.showProductInfo = true
     },
-    placeOrder() {
-      console.log(this.customerName, this.customerPhone,this.summary)
+    async placeOrder() {
+      this.$axios.setHeader('x-hasura-admin-secret', 'soupnazi')
+      let response = ( await this.$axios.$post( "https://hasura-3udj.onrender.com/v1/graphql", 
+      {
+        query: `mutation MyMutation {
+          insert_pickup_orders_one(object: {confirmation_method: "SMS", customer_phone_number: "${this.customerPhone}", customer_name: "${this.customerName}"}) {
+            id
+          }
+        }`
+      })).data;
+      console.log(response)
+      this.joinTable(response.insert_pickup_orders_one.id)
+    },
+
+    async joinTable(order_id) {
+      this.summary.forEach(async element => {
+     
+        let productResponse = ( await this.$axios.$post( "https://hasura-3udj.onrender.com/v1/graphql", 
+        {
+          query: `mutation MyMutation {
+            insert_order_items(objects: {menu_id: "${element.id}", order_id: ${order_id}, notes: "${element.notes}"}) {
+              returning {
+                menu_id
+              }
+            }
+          }`
+        })).data;
+      });
     }
   },
 
