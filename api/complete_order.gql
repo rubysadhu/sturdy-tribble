@@ -1,0 +1,5 @@
+mutation complateOrder($ID: Int) {
+  update_pickup_orders(where: {id: {_eq: $ID}}, _set: {completed: true}) {
+    affected_rows
+  }
+}

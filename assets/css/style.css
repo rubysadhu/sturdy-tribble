@@ -2,24 +2,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-body {
-    padding-left: 40px;
-    padding-right: 340px;
-}
-
 .slab {
     font-family: 'Roboto Slab', serif;
-}
-
-.container {
-    max-width: 860px;
-    margin: 0 auto;
-}
-
-#sidebar {
-    width: 300px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: 0;
 }
