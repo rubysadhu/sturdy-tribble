@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div id="overlay" v-if="completeOrder||showProductInfo" @click="closeModals" class="bg-gray-700 opacity-75" style="left: 0;top:0;position: fixed;width: 100%;height: 100vh;z-index: 999"></div>
+    <div id="overlay" v-if="completeOrder||showProductInfo" @click="closeModals" class="bg-gray-100 opacity-75" style="left: 0;top:0;position: fixed;width: 100%;height: 100vh;z-index: 999"></div>
     
     <div id="product-info" v-if="showProductInfo" class="bg-white rounded p-6 shadow" style="left: 50%;top:20%;position: fixed;width: 600px;margin-left: -300px;z-index: 999">
       <h3 class="font-bold text-gray-800 text-xl">{{currentProduct.name}}</h3>
       <p class="text-gray-600 mb-3">{{currentProduct.description}}</p>
       <textarea v-model="notes" class="bg-gray-200 mb-3 focus:bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" style="height: 100px" placeholder="Notes"></textarea>
 
-      <button @click="addItem(currentProduct)" class="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+      <button @click="addItem(currentProduct)" class="block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
         Add to Cart
       </button>
     </div>
@@ -27,7 +27,7 @@
         </label>
         <input v-model="customerPhone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Phone Number">
       </div>
-      <button @click="placeOrder()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+      <button @click="placeOrder()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
         Place Order
       </button>
     </div>
@@ -52,21 +52,34 @@
         </div>
       </section>
 
+      <div class="flex items-stretch -mx-2">
+        <div class="w-1/3 self-center px-2">
+          <img src="soupchef-truck.jpg" class="rounded-lg" alt="">
+        </div>
+        <div class="w-2/3 self-center px-6">
+          <h3 class="text-xl font-black mb-2 text-gray-800">Pickup Your Order @ the SoupChef Truck</h3>
+          <p class="text-gray-700 mb-4">Soup Chef Food Truck in Fairfield Park Amherstview is locally owned & operated serving Great home made food overlooking Beautiful Lake Ontario</p>
+          <p class="text-gray-600 mb-1"><i class="far fa-truck mr-1"></i> 4574 Bath Rd, Amherstview, Ontario, Canada</p>
+          <p class="text-gray-600 mb-1"><i class="far fa-phone mr-1"></i> (613) 453-0449</p>
+          <p class="text-gray-600 mb-1"><i class="far fa-envelope mr-1"></i> inquiries@soupchef.ca</p>
+        </div>
+      </div>
+
     </div>
 
-    <div id="sidebar" class="bg-white shadow border-l p-4">
+    <div id="sidebar" class="shadow border-l p-4">
       <h4 class="font-bold text-xl border-b mb-3 pb-3 border-gray-200">Your Order</h4>
  
-      <div class="border-b mb-3 pb-3 border-gray-200" v-for="(item, index) in summary">
+      <div class="rounded border-b border-gray-200 mb-3 pb-3" v-for="(item, index) in summary">
         <span class="font-medium">{{item.name}}</span>
-        <span @click="removeItem(index)" class="float-right py-1 px-2 bg-gray-600 text-white rounded-full ml-2 cursor-pointer hover:bg-gray-700" style="font-size: .65rem;"><i class="fas fa-times"></i></span>
+        <span @click="removeItem(index)" class="float-right py-1 px-2 bg-gray-500 text-white rounded-full ml-2 cursor-pointer hover:bg-gray-700" style="font-size: .65rem;"><i class="fas fa-times"></i></span>
         <span class="float-right">${{item.price}}</span>
-        <p v-if="item.notes" class="ml-5 text-xs text-gray-500 italic">"{{item.notes}}"</p>
+        <p v-if="item.notes" class="mx-5 py-1 text-xs text-gray-500 italic">"{{item.notes}}"</p>
       </div>
 
       <div style="position: fixed;bottom: 75px;width: 270px;">
-        <div class="font-bold text-sm">Food &amp; Beverage Total <span class="float-right">${{totalSummary}}</span></div>
-      <small class="block text-gray-500">* HST included</small>
+        <div class="font-bold">Food &amp; Beverage Total <span class="float-right">${{totalSummary}}</span></div>
+        <small class="block text-gray-500">* HST included</small>
       </div>
 
       <button @click="completeOrder=true" type="button" style="position: fixed; bottom: 10px; width: 270px;" class="w-full font-bold inline-flex items-center justify-center px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
@@ -146,7 +159,6 @@ export default {
           }
         }`
       })).data;
-      console.log(response)
       this.joinTable(response.insert_pickup_orders_one.id)
     },
 
