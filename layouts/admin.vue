@@ -1,5 +1,5 @@
 <template>
-<div class="">
+<div style="height: 100vh" class="overflow-hidden">
 
   <nuxt />
 
