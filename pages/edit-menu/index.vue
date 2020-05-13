@@ -1,15 +1,26 @@
 <template>
     <div class="">
-        <!-- <div id="overlay" v-if="viewOrderPopup" class="bg-gray-900 opacity-75 transition ease-in-out duration-200" style="left: 0;top:0;position: fixed;width: 100%;height: 100vh;z-index: 999"></div>
+        <div id="overlay" v-if="editMenuItemPopup" class="bg-gray-900 opacity-75 transition ease-in-out duration-200" style="left: 0;top:0;position: fixed;width: 100%;height: 100vh;z-index: 999"></div>
 
         <slide-y-up-transition>
 
-            <div v-if="viewOrderPopup" class="bg-white relative rounded-md p-6 shadow-md" style="left: 5%;top:5%;position: fixed;width: 90%;z-index: 999">
-                <i @click="closeModals()" class="cursor-pointer absolute top-0 right-0 py-2 px-4 text-5xl leading-none tracking-none text-gray-800 far fa-times"></i>
-                popup
+            <div v-if="editMenuItemPopup" class="bg-white relative rounded-md p-6 shadow-md" style="left: 25%;top:5%;position: fixed;width: 50%;z-index: 999">
+                <i @click="closePopup()" class="cursor-pointer absolute top-0 right-0 py-2 px-4 text-5xl leading-none tracking-none text-gray-800 far fa-times"></i>
+                <div>
+                  <h3 class="text-2xl leading-6 font-bold mb-6 text-gray-900">Edit Menu Item</h3>
+                  <label class="font-medium mb-2">Name</label>
+                  <input v-model="selectedMenuItem.name" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3" type="text">
+                  <label class="font-medium mb-2">Description</label>
+                  <input v-model="selectedMenuItem.description" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3" type="text">
+                  <label class="font-medium mb-2">Price</label>
+                  <input v-model="selectedMenuItem.price" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3" type="text">
+                  <button @click="updateMenuItem()" v-if="selectedMenuItemID != null" class="bg-green-500 rounded p-2 px-4 font-bold uppercase text-white">Save</button>
+
+                  <button @click="saveNewMenuItem()" v-else="" class="bg-green-500 rounded p-2 px-4 font-bold uppercase text-white">Create</button>
+                </div>
             </div>
 
-        </slide-y-up-transition> -->
+        </slide-y-up-transition>
 
 
         <!-- Title -->
@@ -55,12 +66,12 @@
                       <h4 class="text-xl font-medium mb-4">Menu Items</h4>
                       <div v-for="menuItem in selectedMenu.menus" class="p-3 border-2 border-gray-400 rounded bg-white mb-3">
                           <button class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white"><i class="fal fa-trash-alt"></i></button>
-                          <button class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white mr-2">Edit</button>
+                          <button @click="editMenuItem(menuItem)" class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white mr-2">Edit</button>
                           <h4 class="font-bold text-lg">{{menuItem.name}} - ${{menuItem.price}}</h4>
                           <p class="text-gray-600">{{menuItem.description}}</p>
                       </div>
 
-                      <button class="bg-blue-500 rounded p-2 px-4 font-bold uppercase text-white"><i class="fas fa-plus"></i></button>
+                      <button @click="newMenuItem(selectedMenu.menus)" class="bg-blue-500 rounded p-2 px-4 font-bold uppercase text-white"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -90,7 +101,10 @@ export default {
     return {
         menu: null,
         selectedMenu: null,
-        selectedID: null
+        selectedID: null,
+        selectedMenuItem: null,
+        selectedMenuItemID: null,
+        editMenuItemPopup: false
     }
   },
 
@@ -152,18 +166,54 @@ export default {
           force: true
         })
     },
+    async updateMenuItem() {
+      this.$axios.setHeader( 'x-hasura-admin-secret', 'soupnazi' )
+      let response = ( await this.$axios.$post( "https://hasura-3udj.onrender.com/v1/graphql", {
+          query: `mutation {
+            update_menu_items(where: {id: {_eq: "${this.selectedMenuItem.id}"}}, _set: {name: "${this.selectedMenuItem.name}", description: "${this.selectedMenuItem.description}", price: "${this.selectedMenuItem.price}"}) {
+              returning {
+                id
+              }
+            }
+          }
+          `
+        } ) )
+        .data;
+      this.editMenuItemPopup = false
+    },
+    async saveNewMenuItem() {
+      this.$axios.setHeader( 'x-hasura-admin-secret', 'soupnazi' )
+      let response = ( await this.$axios.$post( "https://hasura-3udj.onrender.com/v1/graphql", {
+          query: `mutation {
+            insert_menu_items_one(object: {category: "${this.selectedID}", name: "${this.selectedMenuItem.name}", description: "${this.selectedMenuItem.description}", price: "${this.selectedMenuItem.price}"}) {
+              id
+            }
+          }
+          `
+        } ) )
+        .data;
+      this.editMenuItemPopup = false
+    },
     getCategory(index) {
       this.selectedMenu = this.menu.categories[index]
       this.selectedID = this.selectedMenu.id
+      this.selectedMenuItemID = this.menu.categories[index].id
     },
     newCategory() {
-      console.log(this.selectedID)
       this.selectedID = null
-      this.selectedMenu = {
-        name: "New Category",
-        description: "Awesome new category of amazin' food."
-      }
-      console.log(this.selectedMenu)
+      this.selectedMenu = {}
+    },
+    editMenuItem(menuItem) {
+      this.selectedMenuItem = menuItem
+      this.editMenuItemPopup = true
+    },
+    newMenuItem() {
+      this.selectedMenuItemID = null
+      this.selectedMenuItem = {}
+      this.editMenuItemPopup = true
+    },
+    closePopup() {
+      this.editMenuItemPopup = false
     }
 
   },

@@ -49,7 +49,7 @@
       <span class="ml-4 rounded-lg p-3 text-gray-500 border-2 border-gray-700" style="margin-top: -10px;"><i class="far fa-store mr-1"></i> Store is Open</span>
     </div>
     <div class="w-3/4 text-right">
-    
+
       <a href="/dashboard" class="font-bold text-xl mr-4">Dashboard</a>
       <a href="/kitchen" class="font-bold text-red-500 text-xl mr-4">Kitchen</a>
       <a href="/past-orders" class="font-bold text-xl mr-4">Past Orders</a>
@@ -116,7 +116,7 @@
               <div @click="showPopup(order)" class="bg-gray-500 uppercase text-lg text-center text-white  mr-3 cursor-pointer font-bold py-3 px-4 rounded">
                 <span>View</span>
               </div>
-              <div @click="completeOrder(order)" class="bg-green-500 uppercase text-lg text-center text-white flex-grow cursor-pointer text-white font-bold py-3 px-4 rounded"><i class="fad fa-check-circle mr-1"></i> Completed</div>
+              <div @click="completeOrder(order)" class="bg-green-500 uppercase text-lg text-center text-white flex-grow cursor-pointer text-white font-bold py-3 px-4 rounded"><i class="fad fa-check-circle mr-1"></i> Mark as Done</div>
             </div>
           </div>
         </slide-y-up-transition>
@@ -272,14 +272,14 @@ export default {
 ::-webkit-scrollbar {
     width: 12px;
 }
- 
+
 ::-webkit-scrollbar-track {
     background: #edf2f7;
     border-radius: 10px;
 }
- 
+
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #a0aec0 
+    background: #a0aec0
 }
 </style>

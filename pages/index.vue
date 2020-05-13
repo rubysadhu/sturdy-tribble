@@ -60,10 +60,10 @@
     </section>
 
     <div class="flex items-stretch -mx-2">
-      <div class="w-1/3 self-center px-2">
+      <div class="w-1/4 self-center px-2">
         <img src="soupchef-truck.jpg" class="rounded-lg" alt="">
       </div>
-      <div class="w-2/3 self-center px-6">
+      <div class="w-3/4 self-center px-6">
         <h3 class="text-xl font-black mb-2 text-gray-800">Pickup Your Order @ the SoupChef Truck</h3>
         <p class="text-gray-700 mb-4">Soup Chef Food Truck in Fairfield Park Amherstview is locally owned & operated serving Great home made food overlooking Beautiful Lake Ontario</p>
         <p class="text-gray-600 mb-1"><i class="far fa-truck mr-1"></i> 4574 Bath Rd, Amherstview, Ontario, Canada</p>
