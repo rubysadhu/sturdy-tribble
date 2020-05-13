@@ -65,7 +65,7 @@
                     <div class="p-4 rounded-lg bg-white shadow">
                       <h4 class="text-xl font-medium mb-4">Menu Items</h4>
                       <div v-for="menuItem in selectedMenu.menus" class="p-3 border-2 border-gray-400 rounded bg-white mb-3">
-                          <button class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white"><i class="fal fa-trash-alt"></i></button>
+                          <button @click="deleteMenuItem(menuItem)" class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white"><i class="fal fa-trash-alt"></i></button>
                           <button @click="editMenuItem(menuItem)" class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white mr-2">Edit</button>
                           <h4 class="font-bold text-lg">{{menuItem.name}} - ${{menuItem.price}}</h4>
                           <p class="text-gray-600">{{menuItem.description}}</p>
@@ -112,7 +112,7 @@ export default {
   async asyncData( { $axios, store, params } ) {
     $axios.setHeader( 'x-hasura-admin-secret', 'soupnazi' )
     let response = ( await $axios.$post( "https://hasura-3udj.onrender.com/v1/graphql", {
-        query: `query GetMenuItems {
+        query: `query {
             categories {
               name
               description
@@ -193,6 +193,17 @@ export default {
         } ) )
         .data;
       this.editMenuItemPopup = false
+    },
+    async deleteMenuItem(menu_item) {
+      this.$axios.setHeader( 'x-hasura-admin-secret', 'soupnazi' )
+      let response = ( await this.$axios.$post( "https://hasura-3udj.onrender.com/v1/graphql", {
+          query: `mutation {
+                    delete_menu_items_by_pk(id: "${menu_item.id}") {
+                      id
+                    }
+                  }`
+        } ) )
+        .data;
     },
     getCategory(index) {
       this.selectedMenu = this.menu.categories[index]
