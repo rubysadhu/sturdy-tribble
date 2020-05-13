@@ -18,24 +18,26 @@
   </slide-y-up-transition>
 
 
-  <div id="order-info" v-if="completeOrder" class="bg-white rounded p-6 shadow" style="left: 50%;top:20%;position: fixed;width: 600px;margin-left: -300px;z-index: 999">
-    <h2 class="text-2xl text-gray-600 font-bold mb-2">Place Your Order Now</h2>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">
-        Name
-      </label>
-      <input v-model="customerName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name">
+  <slide-y-up-transition>
+    <div id="order-info" v-if="completeOrder" class="bg-white rounded p-6 shadow" style="left: 50%;top:20%;position: fixed;width: 600px;margin-left: -300px;z-index: 999">
+      <h2 class="text-2xl text-gray-600 font-bold mb-2">Place Your Order Now</h2>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">
+          Name
+        </label>
+        <input v-model="customerName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">
+          Phone Number
+        </label>
+        <input v-model="customerPhone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Phone Number">
+      </div>
+      <button @click="placeOrder()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+        Place Order
+      </button>
     </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">
-        Phone Number
-      </label>
-      <input v-model="customerPhone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Phone Number">
-    </div>
-    <button @click="placeOrder()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-      Place Order
-    </button>
-  </div>
+  </slide-y-up-transition>
 
   <div class="container py-8">
     <span class="rounded-lg bg-green-400 text-xs text-white py-1 px-2 font-bold uppercase" style="position: absolute;top: 10px;left:10px;"><i class="fad fa-check-circle mr-1"></i> We Are Open</span>
@@ -48,11 +50,11 @@
       <p class="text-center mb-6 text-gray-500 italic text-xs">Select the items you want, view order summary and checkout</p>
     </main>
 
-    <section class="mb-12 bg-gray-200 p-4 rounded-md" v-for="category in menu.categories">
-      <h3 class="text-xl rounded text-gray-800">{{category.name}}</h3>
+    <section class="mb-12" v-for="category in menu.categories">
+      <h3 class="text-xl font-bold rounded text-gray-800">{{category.name}}</h3>
       <p class="text-sm mb-3 rounded text-gray-500">{{category.description}}</p>
-      <div @click="getProduct(menuItem)" class="bg-white rounded-md p-4 mb-2 cursor-pointer hover:shadow-lg transition-all duration-500" v-for="menuItem in category.menus">
-        <h4 class="font-bold text-gray-800">{{menuItem.name}} <span class="float-right font-bold">${{menuItem.price}}</span></h4>
+      <div @click="getProduct(menuItem)" class="bg-white border-2 border-gray-300 hover:border-gray-700 rounded-md p-4 mb-2 cursor-pointer hover:shadow-md transition-all duration-500" v-for="menuItem in category.menus">
+        <h4 class="font-medium text-gray-800">{{menuItem.name}} <span class="float-right">${{menuItem.price}}</span></h4>
         <p class="text-gray-600 text-sm">{{menuItem.description}}</p>
       </div>
     </section>
