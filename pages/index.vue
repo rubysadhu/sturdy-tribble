@@ -40,7 +40,7 @@
   </slide-y-up-transition>
 
   <div class="container py-8">
-    <span class="rounded-lg bg-green-400 text-xs text-white py-1 px-2 font-bold uppercase" style="position: absolute;top: 10px;left:10px;"><i class="fad fa-check-circle mr-1"></i> We Are Open</span>
+    <!-- <span class="rounded-lg bg-green-400 text-xs text-white py-1 px-2 font-bold uppercase" style="position: absolute;top: 10px;left:10px;"><i class="fad fa-check-circle mr-1"></i> We Are Open</span> -->
     <header>
       <img src="logo.png" style="max-width: 300px;margin: 0 auto" alt="SoupChef">
     </header>

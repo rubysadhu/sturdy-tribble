@@ -1,9 +1,9 @@
 <template>
-<div style="height: 100vh" class="overflow-hidden">
+  <div class="pb-12 bg-gray-200" style="height: 100vh;overflow-y: scroll">
 
-  <nuxt />
+    <nuxt />
 
-</div>
+  </div>
 </template>
 
 <script>
