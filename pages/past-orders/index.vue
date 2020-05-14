@@ -4,10 +4,7 @@
     <adminNav active="past-orders" />
     <div class="container pt-6">
       <h2 class="text-3xl font-black mb-4">Past Orders</h2>
-      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3 text-lg"
-             id="search"
-             type="text"
-             placeholder="Search">
+      <xInput type="text" placeholder="Search" />
       <div>
         <div @click="showPopup(order)"
              v-for="(order, index) in completed_orders"
@@ -33,8 +30,6 @@
   import confirmOrder from '@/api/confirm_order'
   import completeOrder from '@/api/complete_order'
 
-  import adminNav from '@/components/admin_nav'
-
   import { SlideYUpTransition } from 'vue2-transitions'
   import _ from 'lodash'
 
@@ -42,8 +37,7 @@
     layout: 'admin',
 
     components: {
-      SlideYUpTransition,
-      adminNav
+      SlideYUpTransition
     },
 
     // Data

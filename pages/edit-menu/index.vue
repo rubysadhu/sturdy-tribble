@@ -58,8 +58,9 @@
           <button @click="newCategory()" class="bg-gray-600 rounded p-2 px-4 font-bold uppercase text-white"><i class="fas fa-plus"></i></button>
         </div>
         <div class="w-3/4 px-2">
-          <div class="p-4 rounded-lg bg-white shadow mb-3">
-            <h4 class="text-xl font-medium mb-4">Edit Category</h4>
+          <div class="p-4 rounded-md bg-white mb-3">
+            <h4 v-if="selectedID != null" class="text-xl font-medium mb-4">Edit Category</h4>
+            <h4 v-else="" class="text-xl font-medium mb-4">New Category</h4>
             <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3 text-lg"
                    v-model="selectedMenu.name"
                    type="text">
@@ -70,12 +71,12 @@
             <button @click="saveNewCategory()" v-else="" class="bg-green-500 rounded p-2 px-6 font-bold uppercase text-white">Save Category</button>
           </div>
 
-          <div v-if="selectedMenu.name" class="p-4 rounded-lg bg-white shadow">
+          <div v-if="selectedMenu.name" class="p-4 rounded-md bg-white">
             <h4 class="text-xl font-medium mb-4">Menu Items</h4>
             <div v-for="menuItem in selectedMenu.menus" class="p-3 border-2 border-gray-400 rounded bg-white mb-3">
               <button @click="deleteMenuItem(menuItem)"
                       class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white"><i class="fal fa-trash-alt"></i></button>
-              <button @click="editMenuItem(menuItem)" class="float-right bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white mr-2">Edit</button>
+              <button @click="editMenuItem(menuItem)" class="float-right ml-6 bg-gray-500 rounded p-2 px-6 font-bold uppercase text-white mr-2">Edit</button>
               <h4 class="font-bold text-lg">{{menuItem.name}} - ${{menuItem.price}}</h4>
               <p class="text-gray-600">{{menuItem.description}}</p>
             </div>
@@ -96,7 +97,6 @@
   import confirmOrder from '@/api/confirm_order'
   import completeOrder from '@/api/complete_order'
 
-  import adminNav from '@/components/admin_nav'
 
   import { SlideYUpTransition } from 'vue2-transitions'
   import _ from 'lodash'
@@ -105,8 +105,7 @@
     layout: 'admin',
 
     components: {
-      SlideYUpTransition,
-      adminNav
+      SlideYUpTransition
     },
 
     // Data

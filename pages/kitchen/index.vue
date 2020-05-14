@@ -156,8 +156,6 @@
   import confirmOrder from '@/api/confirm_order'
   import completeOrder from '@/api/complete_order'
 
-  import adminNav from '@/components/admin_nav'
-
   import { SlideYUpTransition } from 'vue2-transitions'
   import _ from 'lodash'
 
@@ -165,8 +163,7 @@
     layout: 'admin',
 
     components: {
-      SlideYUpTransition,
-      adminNav
+      SlideYUpTransition
     },
 
     // Data
@@ -220,7 +217,7 @@
         order_items.forEach(item => {
           total += parseFloat(item.menu_item.price)
         })
-        return total
+        return total.toFixed(2)
       },
 
       showPopup(order) {

@@ -5,7 +5,7 @@
     <div id="overlay"
          v-if="completeOrder||showProductInfo"
          @click="closeModals"
-         class="bg-gray-100 opacity-75 transition ease-in-out duration-200"
+         class="bg-gray-800 opacity-75 transition ease-in-out duration-200"
          style="left: 0;top:0;position: fixed;width: 100%;height: 100vh;z-index: 999"></div>
 
     <slide-y-up-transition>
@@ -14,17 +14,14 @@
            v-if="showProductInfo"
            class="bg-white rounded p-6 shadow"
            style="left: 50%;top:20%;position: fixed;width: 600px;margin-left: -300px;z-index: 999">
-        <h3 class="font-bold text-gray-800 text-xl">{{currentProduct.name}}</h3>
+        <h3 class="font-medium text-gray-800 text-2xl">{{currentProduct.name}} <span class="float-right">${{currentProduct.price}}</span></h3>
         <p class="text-gray-600 mb-3">{{currentProduct.description}}</p>
         <textarea v-model="notes"
-                  class="bg-gray-200 mb-3 focus:bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-
+                  class="mb-3 focus:bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   style="height: 100px"
-                  placeholder="Notes"></textarea>
-
+                  placeholder="Need something specific? Add your notes here."></textarea>
         <button @click="addItem(currentProduct)"
-                class="block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-
+                class="block w-full text-lg bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button">
           Add to Cart
         </button>
@@ -72,7 +69,7 @@
     <div class="container py-8">
       <!-- <span class="rounded-lg bg-green-400 text-xs text-white py-1 px-2 font-bold uppercase" style="position: absolute;top: 10px;left:10px;"><i class="fad fa-check-circle mr-1"></i> We Are Open</span> -->
       <header>
-        <img src="logo.png" style="max-width: 300px;margin: 0 auto" alt="SoupChef">
+        <img src="logo.png" style="max-width: 380px;margin: 0 auto" alt="SoupChef">
       </header>
       <main class="py-8">
         <h2 class="text-center mb-2 text-5xl font-black text-gray-800">Place Your Pickup Order</h2>
@@ -81,22 +78,23 @@
       </main>
 
       <section class="mb-12" v-for="category in menu.categories">
-        <h3 class="text-xl font-bold rounded text-gray-800">{{category.name}}</h3>
+        <h3 class="text-xl font-black rounded uppercase text-red-700">{{category.name}}</h3>
         <p class="text-sm mb-3 rounded text-gray-500">{{category.description}}</p>
-        <div @click="getProduct(menuItem)"
-             class="bg-white border-2 border-gray-300 hover:border-gray-700 rounded-md p-4 mb-2 cursor-pointer hover:shadow-md transition-all duration-500"
-
-             v-for="menuItem in category.menus">
+        <hr class="mb-3">
+        <div class="bg-white mb-4 transition-all duration-500" v-for="menuItem in category.menus">
+          <button @click="getProduct(menuItem)" class="px-2 py-1 rounded bg-gray-200 text-gray-700 font-medium float-right ml-3"><i class="fas fa-plus mr-1 text-gray-500"></i> ADD</button>
           <h4 class="font-medium text-gray-800">{{menuItem.name}} <span class="float-right">${{menuItem.price}}</span></h4>
-          <p class="text-gray-600 text-sm">{{menuItem.description}}</p>
+          <p class="text-gray-600 text-sm mb-2">{{menuItem.description}}</p>
         </div>
       </section>
 
+      <hr class="mb-12">
+
       <div class="flex items-stretch -mx-2">
-        <div class="w-1/4 self-center px-2">
-          <img src="soupchef-truck.jpg" class="rounded-lg" alt="">
+        <div class="w-1/4  px-2">
+          <img src="soupchef-truck.jpg" class="rounded-full" alt="">
         </div>
-        <div class="w-3/4 self-center px-6">
+        <div class="w-3/4  px-6">
           <h3 class="text-xl font-black mb-2 text-gray-800">Pickup Your Order @ the SoupChef Truck</h3>
           <p class="text-gray-700 mb-4">Soup Chef Food Truck in Fairfield Park Amherstview is locally owned & operated serving Great home made food overlooking
             Beautiful Lake Ontario</p>
@@ -108,21 +106,19 @@
 
     </div>
 
-    <div id="sidebar" class="shadow border-l p-4">
-      <h4 class="font-bold text-xl border-b mb-3 pb-3 border-gray-200">Your Order</h4>
+    <div id="sidebar" class="border-l text-gray-800 border-gray-400 bg-gray-200 border-l p-4">
+      <h4 class="font-bold text-xl border-b mb-3 text-gray-800 border-gray-200">Your Order</h4>
 
       <slide-x-left-transition tag="div" group>
 
-        <div class="rounded border-b border-gray-200 mb-3 pb-3" v-for="(item, index) in summary" :key="index">
+        <div class="rounded bg-white border-b border-gray-200 mb-2 p-3" v-for="(item, index) in summary" :key="index">
 
-          <div class="flex items-center justify-between">
-            <span class="font-medium">{{item.name}}</span>
-            <div class="">
-              <span class="">${{item.price}}</span>
-              <span @click="removeItem(index)"
-                    class=" py-1 px-2 bg-gray-500 text-white rounded-full ml-2 cursor-pointer hover:bg-gray-700"
-                    style="font-size: .65rem;"><i class="fas fa-times"></i></span>
-            </div>
+          <div class=" text-sm ">
+            <span @click="removeItem(index)"
+                  class="float-right py-1 px-2 bg-gray-300 text-gray-700 rounded-full ml-2 cursor-pointer hover:bg-gray-400"
+                  style="font-size: .65rem;"><i class="fas fa-times"></i></span>
+            <p class="font-medium"><span class="mr-2">1</span> {{item.name}}</p>
+            <p class="block text-gray-600 pl-5">${{item.price}}</p>
           </div>
 
           <p v-if="item.notes" class="mx-5 py-1 text-xs text-gray-500 italic">"{{item.notes}}"</p>
@@ -131,17 +127,16 @@
 
       </slide-x-left-transition>
 
-      <div style="position: fixed;bottom: 75px;width: 270px;">
-        <div class="font-bold">Food &amp; Beverage Total <span class="float-right">${{totalSummary}}</span></div>
-        <small class="block text-gray-500">* HST included</small>
-      </div>
+      <div class="bg-white rounded p-4" style="position: fixed;bottom: 15px;width: 270px;">
+        <div class="font-medium text-sm">Food &amp; Beverage Total <span class="text-gray-800 font-bold text-lg float-right">${{totalSummary}}</span></div>
+        <small class=" text-sm block text-gray-500 mb-3">* HST included</small>
 
-      <button @click="completeOrder=true"
-              type="button"
-              style="position: fixed; bottom: 10px; width: 270px;"
-              class="w-full font-bold inline-flex items-center justify-center px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
-        CHECKOUT
-      </button>
+        <button @click="completeOrder=true"
+                type="button"
+                class="w-full text-lg font-bold inline-flex items-center justify-center px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
+          CHECKOUT
+        </button>
+      </div>
     </div>
   </div>
 
@@ -264,7 +259,7 @@
         this.summary.forEach(menuItem => {
           total += parseFloat(menuItem.price)
         })
-        return total
+        return total.toFixed(2)
       }
     }
   }

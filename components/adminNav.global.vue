@@ -3,7 +3,7 @@
   <div class="">
     <div class="bg-gray-900 flex text-white border-b border-gray-300 shadow p-5">
       <div class="w-1/4">
-        <img src="logo.png" style="display:inline-block;width: 120px;margin-top: -5px;" alt="">
+        <logo />
         <span class="ml-4 rounded-lg p-3 text-gray-500 border-2 border-gray-700" style="margin-top: -10px;"><i class="far fa-store mr-1"></i> Store is Open</span>
       </div>
       <div class="w-3/4 text-right">
