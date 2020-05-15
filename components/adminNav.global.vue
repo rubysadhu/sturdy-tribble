@@ -9,7 +9,7 @@
       <div class="w-3/4 text-right">
         <a v-bind:class="{ 'text-red-500': active == 'dashboard' }" href="/dashboard" class="font-bold text-xl mr-4">Dashboard</a>
         <a v-bind:class="{ 'text-red-500': active == 'kitchen' }" href="/kitchen" class="font-bold text-xl mr-4">Kitchen</a>
-        <a v-bind:class="{ 'text-red-500': active == 'edit-menu' }" href="edit-menu" class="font-bold text-xl mr-4">Edit Menu</a>
+        <a v-bind:class="{ 'text-red-500': active == 'edit-menu' }" href="/edit-menu" class="font-bold text-xl mr-4">Edit Menu</a>
         <a v-bind:class="{ 'text-red-500': active == 'past-orders' }" href="/past-orders" class="font-bold text-xl">Past Orders</a>
       </div>
     </div>
