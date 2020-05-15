@@ -1,9 +1,9 @@
 module.exports = ( req, res ) => {
   const order_id = req.query.order_id
-
-  $axios.setHeader('x-hasura-admin-secret', 'soupnazi')
+  const axios = require ('@nuxtjs/axios')
+  axios.setHeader('x-hasura-admin-secret', 'soupnazi')
   let response = (
-    await $axios.$post('https://hasura-3udj.onrender.com/v1/graphql', {
+    await axios.$post('https://hasura-3udj.onrender.com/v1/graphql', {
       query: `query {
                 pickup_orders(where: {id: {_eq: ${order_id}}})
               }`
