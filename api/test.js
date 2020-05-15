@@ -1,6 +1,6 @@
+const axios = require ('@nuxtjs/axios')
 module.exports = ( req, res ) => {
   const order_id = req.query.order_id
-  const axios = require ('@nuxtjs/axios')
   axios.setHeader('x-hasura-admin-secret', 'soupnazi')
   let response = (
     await axios.$post('https://hasura-3udj.onrender.com/v1/graphql', {
