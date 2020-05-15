@@ -4,7 +4,7 @@ module.exports = ( req, res ) => {
   const order_id = req.query.order_id
   twilioClient.messages
     .create({
-       body: `Get order id:`,
+       body: `Get order id: ${order_id}`,
        from: '+15878017440',
        to: '+16474068748'
      })
