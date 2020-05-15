@@ -19,7 +19,17 @@ module.exports = async ( req, res ) => {
   const response = (
     await axios.post('https://hasura-3udj.onrender.com/v1/graphql', {
       query:  `query {
-                pickup_orders(where: {id: {_eq: ${order_id}}})
+                pickup_orders(where: {id: {_eq: ${order_id}}}) {
+                    customer_name
+                    order_items {
+                      notes
+                      menu_item {
+                        name
+                        price
+                      }
+                    }
+                  }
+                }
               }`
     })
   ).data
