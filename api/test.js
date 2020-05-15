@@ -9,13 +9,16 @@ module.exports = ( req, res ) => {
     query: `query {
               pickup_orders(where: {id: {_eq: ${order_id}}})
             }`
+  }).catch(function (error) {
+    console.log('the error', error);
   }).then(function (response) {
     console.log('the data', response.data)
     response = response.data
+    res.json({result: response})
   });
 
 
-  res.json({result: response})
+
 };
 //
 // import getOrders from '@/api/get_all_order'
