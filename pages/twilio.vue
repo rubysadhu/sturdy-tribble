@@ -15,6 +15,8 @@
 
   // require('~/send_sms.js')();
 
+  import sendTheSMS from '@/api/send_sms'
+
 
 
   export default {
@@ -25,22 +27,8 @@
       }
     },
     methods: {
-      async sendSMS() {
-        const accountSid = 'ACfe59a083beab96197347e43a1c7652d6';
-        const authToken = '1b7154c576de00d23b38f70e15643ab0';
-        const twilio = require('twilio');
-
-        const client = new twilio(accountSid, authToken);
-        await client.messages
-          .create({
-             body: 'From a button.',
-             statusCallback: 'https://postb.in/b/1589527924144-5734390488360',
-             from: '+15878017440',
-             to: '+16474068748'
-           })
-          .then(function(err, messages) {
-            console.log(err, message.sid)
-          });
+      sendSMS() {
+        sendTheSMS()
 
       }
     },

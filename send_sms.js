@@ -36,5 +36,5 @@ Mannete - SoupChef`,
      from: '+15878017440',
      to: '+16474068748'
    })
-  .then(message => console.log(message.sid));
+  .then(message => console.log( message ));
 console.log('hey')

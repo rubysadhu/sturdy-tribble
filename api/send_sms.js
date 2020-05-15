@@ -10,5 +10,5 @@ module.exports = ( req, res ) => {
        from: '+15878017440',
        to: '+16474068748'
      })
-    .then(message => res.json( messages ));
+    .then(message => console.log( message ));
 };
