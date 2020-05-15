@@ -1,4 +1,4 @@
 module.exports = ( req, res ) => {
-  console.log(req, res)
-  res.json({result: 'completed'})
+  console.log(req.query)
+  res.json({result: req.query})
 };
