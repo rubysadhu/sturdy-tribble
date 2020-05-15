@@ -10,8 +10,5 @@ module.exports = ( req, res ) => {
        from: '+15878017440',
        to: '+16474068748'
      })
-    .then(function(err, messages) {
-      console.log(err, messages.sid)
-      res.json( messages )
-    });
+    .then(message => res.json( messages ));
 };
