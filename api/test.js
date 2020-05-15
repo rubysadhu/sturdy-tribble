@@ -1,4 +1,4 @@
 module.exports = ( req, res ) => {
-  console.log(req.query)
-  res.json({result: req.query})
+  const order_id = req.query.order_id
+  res.json({result: order_id})
 };
