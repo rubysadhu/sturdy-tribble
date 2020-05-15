@@ -1,8 +1,6 @@
 <template>
   <div class="pb-12 bg-gray-200" style="height: 100vh;overflow-y: scroll">
-
     <nuxt />
-
   </div>
 </template>
 
@@ -10,5 +8,4 @@
   export default {}
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

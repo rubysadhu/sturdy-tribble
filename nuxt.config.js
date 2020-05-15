@@ -93,7 +93,7 @@ export default {
   server: {
     port: 8484
   },
-
+  
   /*
   ** Build configuration
   */
@@ -101,6 +101,10 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend( config, ctx ) {}
+      extend (config, { isDev, isClient }) {
+        config.node = {
+            fs: 'empty'
+        }
+      }
   }
 }

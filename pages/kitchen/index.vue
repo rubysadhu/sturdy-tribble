@@ -29,7 +29,7 @@
                 NOTES
               </dd>
             </div>
-            <div v-for="item in viewedOrder.order_items" :key="item" class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5 text-xl">
+            <div v-for="item in viewedOrder.order_items" :key="item" class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5 text-lg">
               <dt class="leading-5 font-medium text-gray-900">
                 <span class="mr-3">1</span> {{item.menu_item.name}}
               </dt>
@@ -43,7 +43,7 @@
           </dl>
           <div v-if="!viewedOrder.confirmed"
                @click="confirmOrder(viewedOrder)"
-               class="bg-green-500 flex-grow text-white text-center uppercase  flex-grow cursor-pointer text-white text-2xl font-bold py-3 px-6 rounded">Confirm Order</div>
+               class="bg-green-500 flex-grow text-white text-center uppercase flex-grow cursor-pointer text-white text-xl font-bold py-3 px-6 rounded">Confirm Order</div>
         </div>
       </div>
 
@@ -74,7 +74,7 @@
                 <div>${{ calcOrderTotal(order.order_items) }}</div>
               </div>
               <div class=" mt-2">
-                <div @click="showPopup(order)" class="bg-red-500 text-lg uppercase text-white cursor-pointer font-bold py-3 px-4 rounded text-center">
+                <div @click="showPopup(order)" class="bg-red-500 uppercase text-white cursor-pointer font-bold py-3 px-4 rounded text-center">
                   <span>View Order</span>
                 </div>
               </div>
@@ -105,11 +105,11 @@
                 <div>${{ calcOrderTotal(order.order_items) }}</div>
               </div>
               <div class="flex items-center mt-2">
-                <div @click="showPopup(order)" class="bg-gray-500 uppercase text-lg text-center text-white  mr-3 cursor-pointer font-bold py-3 px-4 rounded">
+                <div @click="showPopup(order)" class="bg-gray-500 uppercase text-center text-white  mr-3 cursor-pointer font-bold py-3 px-4 rounded">
                   <span>View</span>
                 </div>
                 <div @click="completeOrder(order)"
-                     class="bg-green-500 uppercase text-lg text-center text-white flex-grow cursor-pointer text-white font-bold py-3 px-4 rounded"><i class="fad fa-check-circle mr-1"></i> Mark as Done</div>
+                     class="bg-green-500 uppercase text-center text-white flex-grow cursor-pointer text-white font-bold py-3 px-4 rounded"><i class="fad fa-check-circle mr-1"></i> Mark as Done</div>
               </div>
             </div>
           </slide-y-up-transition>
@@ -133,7 +133,7 @@
               <!-- <span class="float-right"><i class="far fa-check-circle"></i></span> -->
               #{{ order.id }}
             </h1>
-            <div class="flex items-center text-lg  justify-between font-medium">
+            <div class="flex items-center justify-between font-medium">
               <div>
                 <h3>{{ order.customer_name }}</h3>
               </div>
