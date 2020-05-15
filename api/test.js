@@ -18,37 +18,21 @@ module.exports = async ( req, res ) => {
 
   const response = (
     await axios.post('https://hasura-3udj.onrender.com/v1/graphql', {
-      query:  `query {
-                pickup_orders(where: {id: {_eq: ${order_id}}}) {
-                    customer_name
-                    order_items {
-                      notes
-                      menu_item {
-                        name
-                        price
-                      }
-                    }
-                  }
-                }
-              }`
+      query:  `query MyQuery {
+  pickup_orders(where: {id: {_eq: ${order_id}}}) {
+    customer_name
+    order_items {
+      notes
+      menu_item {
+        name
+        price
+      }
+    }
+  }
+}
+`
     })
   ).data
 
   res.json({result: response})
-};
-
-//
-// async function getOrder(order_id) {
-//   try {
-//     const response = (
-//       await axios.post('https://hasura-3udj.onrender.com/v1/graphql', {
-//         query:  `query {
-//                   pickup_orders(where: {id: {_eq: ${order_id}}})
-//                 }`
-//       })
-//     ).data
-//     console.log(response);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+}
