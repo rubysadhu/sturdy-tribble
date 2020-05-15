@@ -1,10 +1,10 @@
 const axios = require('axios').default;
 module.exports = ( req, res ) => {
   const order_id = req.query.order_id
-  axios.setHeader('x-hasura-admin-secret', 'soupnazi')
   let response = 'nothing'
   axios({
     method: 'post',
+    headers: {'x-hasura-admin-secret': 'soupnazi'},
     url: 'https://hasura-3udj.onrender.com/v1/graphql',
     query: `query {
               pickup_orders(where: {id: {_eq: ${order_id}}})
