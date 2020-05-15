@@ -1,8 +1,5 @@
 export default {
   mode: 'spa',
-  /*
-  ** Headers of the page
-  */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -39,43 +36,28 @@ export default {
       }
     ]
   },
-  /*
-  ** Customize the progress-bar color
-  */
   loading: {
     color: '#fff'
   },
-  /*
-  ** Global CSS
-  */
+  env: {
+    twilio_accountSid: 'ACfe59a083beab96197347e43a1c7652d6',
+    twilo_authToken: '3ff5e19d05443ac401e649c697e070de'
+  },
   css: ['@/assets/css/style.css'],
-  /*
-  ** Plugins to load before mounting the App
-  */
   plugins: [
     {
       src: '~/plugins/animation'
     }
   ],
-  /*
-  ** Nuxt.js dev-modules
-  */
   buildModules: [ // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/global-components'
   ],
-  /*
-  ** Nuxt.js modules
-  */
   modules: [ // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/apollo' ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
+    '@nuxtjs/apollo'
+  ],
   axios: {},
-
   apollo: {
     clientConfigs: {
       default: {
@@ -89,22 +71,12 @@ export default {
       }
     }
   },
-
   server: {
     port: 8484
   },
-  
-  /*
-  ** Build configuration
-  */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-      extend (config, { isDev, isClient }) {
-        config.node = {
-            fs: 'empty'
-        }
-      }
+    extend (config, ctx) {
+
+    }
   }
 }
