@@ -70,7 +70,7 @@
         order_items.forEach(item => {
           total += parseFloat(item.menu_item.price)
         })
-        return total
+        return total.toFixed(2)
       }
     },
 
