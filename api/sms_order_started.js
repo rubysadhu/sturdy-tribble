@@ -29,30 +29,49 @@ module.exports = async ( req, res ) => {
 `
   })
 
-  const sms_message = `Thanks for your order, ${current_order.customer_name},
-
-Here's your order:
-
-https://super-duper-rotary-phone-2.now.sh/order/${order_id}
-
-${order_details}
-
-Total: $${order_total}
-*HST Included
-
-Directions:
-
-4574 Bath Rd, Amherstview,
-Ontario, Canada
-
-See you at the truck!
-
-Mannette,
-SoupChef`
+//   const sms_message = `Thanks for your order, ${current_order.customer_name},
+//
+// Here's your order:
+//
+// https://super-duper-rotary-phone-2.now.sh/order/${order_id}
+//
+// ${order_details}
+//
+// Total: $${order_total}
+// *HST Included
+//
+// Directions:
+//
+// 4574 Bath Rd, Amherstview,
+// Ontario, Canada
+//
+// See you at the truck!
+//
+// Mannette,
+// SoupChef`
 
   twilioClient.messages
     .create({
-       body: `Thanks for your order, ${current_order.customer_name},`,
+       body: `Thanks for your order, ${current_order.customer_name},
+
+     Here's your order:
+
+     https://super-duper-rotary-phone-2.now.sh/order/${order_id}
+
+     ${order_details}
+
+     Total: $${order_total}
+     *HST Included
+
+     Directions:
+
+     4574 Bath Rd, Amherstview,
+     Ontario, Canada
+
+     See you at the truck!
+
+     Mannette,
+     SoupChef`,
        from: '+15878017440',
        to: '+16474068748'
      })
