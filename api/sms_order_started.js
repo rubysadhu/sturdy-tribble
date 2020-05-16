@@ -52,7 +52,7 @@ SoupChef`
 
   twilioClient.messages
     .create({
-       body: sms_message,
+       body: 'whattt',
        from: '+15878017440',
        to: '+16474068748'
      })
