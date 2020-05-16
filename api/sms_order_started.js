@@ -56,8 +56,6 @@ module.exports = async ( req, res ) => {
 
      Here's your order:
 
-     https://super-duper-rotary-phone-2.now.sh/order/${order_id}
-
      ${order_details}
 
      Total: $${order_total}
