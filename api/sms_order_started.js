@@ -25,40 +25,37 @@ module.exports = async ( req, res ) => {
   let order_details = ''
 
   current_order.order_items.forEach((item, i) => {
-    order_details += `- 1  ${item.menu_item.name}
-`
+    order_details += `- 1  ${item.menu_item.name}`
   })
 
-  const sms_message = `Thanks for your order, ${current_order.customer_name},
-
-Here's your order
-
-https://super-duper-rotary-phone-2.now.sh/order/${order_id}
-
-${order_details}
-
-Total: $${order_total}
-*HST Included
-
-Directions:
-
-4574 Bath Rd, Amherstview,
-Ontario, Canada
-
-See you at the truck!
-
-Mannette,
-SoupChef`
+//   const sms_message = `Thanks for your order, ${current_order.customer_name},
+//
+// Here's your order
+//
+// https://super-duper-rotary-phone-2.now.sh/order/${order_id}
+//
+// ${order_details}
+//
+// Total: $${order_total}
+// *HST Included
+//
+// Directions:
+//
+// 4574 Bath Rd, Amherstview,
+// Ontario, Canada
+//
+// See you at the truck!
+//
+// Mannette,
+// SoupChef`
 
   twilioClient.messages
     .create({
        body: `Thanks for your order, ${current_order.customer_name},
-.
+
      Here's your order:
 
-     ${order_details}
 
-     Total: $${order_total}
      *HST Included
 
      Directions:
