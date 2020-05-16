@@ -23,7 +23,6 @@ module.exports = async ( req, res ) => {
   const order_total = calcOrderTotal(current_order.order_items)
   let order_details = ''
 
-  console.log(current_order)
   current_order.order_items.forEach((item, i) => {
     order_details += `- 1  ${item.menu_item.name}\n`
   })
@@ -48,7 +47,7 @@ See you at the truck!
 
 Mannette,
 SoupChef`
-res.json({result: current_order})
+res.json({result: message})
 }
 
 function calcOrderTotal(order_items) {
