@@ -18,39 +18,37 @@ module.exports = async ( req, res ) => {
       query: get_order_gql
     })
   )
-  const current_order = hasura_response.data.data
+  const current_order = hasura_response.data.data.pickup_orders[0]
 
-  res.json({result: current_order})
+  const order_total = calcOrderTotal(current_order.order_items)
+  let order_details = ''
 
-  // const order_total = calcOrderTotal(current_order.order_items)
-  // let order_details = ''
-  //
-  // console.log(current_order)
-  // current_order.order_items.forEach((item, i) => {
-  //   order_details += `- 1  ${item.menu_item.name}\n`
-  // })
+  console.log(current_order)
+  current_order.order_items.forEach((item, i) => {
+    order_details += `- 1  ${item.menu_item.name}\n`
+  })
 
-//   const message = `Thanks for your order, ${current_order.customer_name},
-//
-// Here's your order:
-//
-// https://super-duper-rotary-phone-2.now.sh/order/${order_id}
-//
-// ${order_details}
-//
-// Total: $${order_total}
-// *HST Included
-//
-// Directions:
-//
-// 4574 Bath Rd, Amherstview,
-// Ontario, Canada
-//
-// See you at the truck!
-//
-// Mannette,
-// SoupChef`
-// res.json({result: current_order})
+  const message = `Thanks for your order, ${current_order.customer_name},
+
+Here's your order:
+
+https://super-duper-rotary-phone-2.now.sh/order/${order_id}
+
+${order_details}
+
+Total: $${order_total}
+*HST Included
+
+Directions:
+
+4574 Bath Rd, Amherstview,
+Ontario, Canada
+
+See you at the truck!
+
+Mannette,
+SoupChef`
+res.json({result: current_order})
 }
 
 function calcOrderTotal(order_items) {
