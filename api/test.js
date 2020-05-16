@@ -19,5 +19,43 @@ module.exports = async ( req, res ) => {
     })
   )
   const current_order = hasura_response.data.data
-  res.json({result: current_order})
+
+
+  let order_total = calcOrderTotal(current_order.order_items)
+  let order_details = ''
+
+  current_order.order_items.menu_item.forEach((item, i) => {
+    order_details += `- 1  ${item.name}\n`
+  })
+
+  const message = `Thanks for your order, ${current_order.customer_name},
+
+Here's your order:
+
+https://super-duper-rotary-phone-2.now.sh/order/${order_id}
+
+${order_details}
+
+Total: $${order_total}
+*HST Included
+
+Directions:
+
+4574 Bath Rd, Amherstview,
+Ontario, Canada
+
+See you at the truck!
+
+Mannette,
+SoupChef`
+res.json({result: message})
+}
+
+
+calcOrderTotal(order_items) {
+  let total = 0
+  order_items.forEach(item => {
+    total += parseFloat(item.menu_item.price)
+  })
+  return total.toFixed(2)
 }
