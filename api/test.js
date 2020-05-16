@@ -20,12 +20,14 @@ module.exports = async ( req, res ) => {
   )
   const current_order = hasura_response.data.data
 
-
-  let order_total = calcOrderTotal(current_order.order_items)
+  const order_total = calcOrderTotal(current_order.order_items)
   let order_details = ''
 
-  current_order.order_items.menu_item.forEach((item, i) => {
-    order_details += `- 1  ${item.name}\n`
+  console.log(current_order)
+  current_order.order_items.forEach((order_items, i) => {
+    order_items.menu_item.forEach((menu_item, i) => {
+      order_details += `- 1  ${menu_item.name}\n`
+    })
   })
 
   const message = `Thanks for your order, ${current_order.customer_name},
