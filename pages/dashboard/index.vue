@@ -115,9 +115,11 @@
     methods: {
       async testAPI() {
         const dataURL = 'https://sturdy-tribble-nine.now.sh/api/name/world'
-        $.getJSON(dataURL, function(data) {
-          console.log(data, 'data')
-        });
+        // $.getJSON(dataURL, function(data) {
+        //   console.log(data, 'data')
+        // });
+        let response = await axios.get(dataURL)
+        console.log(response, 'response')
       },
       calcOrderTotalSales(pickup_orders) {
         let total = 0
