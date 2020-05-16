@@ -78,7 +78,7 @@ res.json({result: message})
 //     .then(message => res.json( message ))
 };
 
-calcOrderTotal(order_items) {
+function calcOrderTotal(order_items) {
   let total = 0
   order_items.forEach(item => {
     total += parseFloat(item.menu_item.price)
