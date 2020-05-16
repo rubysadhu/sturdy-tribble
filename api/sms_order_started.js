@@ -53,7 +53,7 @@ module.exports = async ( req, res ) => {
   twilioClient.messages
     .create({
        body: `Thanks for your order, ${current_order.customer_name},
-
+.
      Here's your order:
 
      ${order_details}
