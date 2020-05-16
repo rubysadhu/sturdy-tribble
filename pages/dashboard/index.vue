@@ -74,6 +74,7 @@
 
 <script>
 
+  const axios = require('axios').default;
   import getOrders from '@/api/get_all_order'
   import { SlideYUpTransition } from 'vue2-transitions'
   import _ from 'lodash'
@@ -112,12 +113,11 @@
     },
 
     methods: {
-      testAPI() {
-        const dataURL = 'http://localhost:3000/api/test?order_id=36'
+      async testAPI() {
+        const dataURL = 'https://sturdy-tribble-nine.now.sh/api/name/world'
         $.getJSON(dataURL, function(data) {
           console.log(data, 'data')
         });
-        console.log('hey')
       },
       calcOrderTotalSales(pickup_orders) {
         let total = 0
