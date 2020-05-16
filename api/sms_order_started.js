@@ -51,22 +51,7 @@ module.exports = async ( req, res ) => {
 
   twilioClient.messages
     .create({
-       body: `Thanks for your order, ${current_order.customer_name},
-
-     Here's your order:
-
-
-     *HST Included
-
-     Directions:
-
-     4574 Bath Rd, Amherstview,
-     Ontario, Canada
-
-     See you at the truck!
-
-     Mannette,
-     SoupChef`,
+       body: `Thanks for your order, ${current_order.customer_name}, SoupChef`,
        from: '+15878017440',
        to: '+16474068748'
      })

@@ -32,8 +32,6 @@ module.exports = async ( req, res ) => {
 
 Here's your order:
 
-https://super-duper-rotary-phone-2.now.sh/order/${order_id}
-
 ${order_details}
 
 Total: $${order_total}
@@ -48,7 +46,7 @@ See you at the truck!
 
 Mannette,
 SoupChef`
-res.json({result: message})
+  res.json({result: message})
 }
 
 function calcOrderTotal(order_items) {

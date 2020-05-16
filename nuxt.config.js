@@ -39,17 +39,20 @@ export default {
   loading: {
     color: '#fff'
   },
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
   css: ['@/assets/css/style.css'],
   plugins: [
     {
       src: '~/plugins/animation'
     }
   ],
-  buildModules: [ // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
+  buildModules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/global-components'
   ],
-  modules: [ // Doc: https://axios.nuxtjs.org/usage
+  modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo'
   ],

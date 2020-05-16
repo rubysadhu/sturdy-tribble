@@ -61,6 +61,8 @@
         </div>
       </div>
 
+      <button @click="testAPI()">click to test API</button>
+
       <p class="text-sm text-gray-600 mb-3">Hasura Database: https://hasura-3udj.onrender.com/console/data/schema/public</p>
       <p class="text-sm text-gray-600 mb-3">Vercel Web Hosting: https://vercel.com/monetizedesign/super-duper-rotary-phone-2</p>
       <p class="text-sm text-gray-600 mb-3">Twilio SMS: https://www.twilio.com/</p>
@@ -73,6 +75,7 @@
 <script>
 
   import getOrders from '@/api/get_all_order'
+  import getTestAPI from '@/api/test'
   import { SlideYUpTransition } from 'vue2-transitions'
   import _ from 'lodash'
 
@@ -110,6 +113,10 @@
     },
 
     methods: {
+      testAPI() {
+        getTestAPI
+        console.log('hey', getTestAPI)
+      },
       calcOrderTotalSales(pickup_orders) {
         let total = 0
         pickup_orders.forEach(item => {
