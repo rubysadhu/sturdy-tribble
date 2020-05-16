@@ -25,7 +25,8 @@ module.exports = async ( req, res ) => {
   let order_details = ''
 
   current_order.order_items.forEach((item, i) => {
-    order_details += `- 1  ${item.menu_item.name}\n`
+    order_details += `- 1  ${item.menu_item.name}
+`
   })
 
   const sms_message = `Thanks for your order, ${current_order.customer_name},
@@ -51,7 +52,7 @@ SoupChef`
 
   twilioClient.messages
     .create({
-       body: `${sms_message}`,
+       body: sms_message,
        from: '+15878017440',
        to: '+16474068748'
      })
