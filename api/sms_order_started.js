@@ -52,7 +52,7 @@ SoupChef`
 
   twilioClient.messages
     .create({
-       body: 'whattt',
+       body: `Thanks for your order, ${current_order.customer_name},`,
        from: '+15878017440',
        to: '+16474068748'
      })
