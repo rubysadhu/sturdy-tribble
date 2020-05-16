@@ -31,7 +31,7 @@ module.exports = async ( req, res ) => {
 
   const sms_message = `Thanks for your order, ${current_order.customer_name},
 
-Here's your order:
+Here's your order
 
 https://super-duper-rotary-phone-2.now.sh/order/${order_id}
 
