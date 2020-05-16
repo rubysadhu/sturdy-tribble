@@ -4,9 +4,8 @@ const twilioClient = require('twilio')('ACfe59a083beab96197347e43a1c7652d6', '3f
 module.exports = async ( req, res ) => {
   const order_id = req.query.order_id
   const get_order_gql = `query getCurrentOrder {
-    pickup_orders(where: {id: {_eq: ${order_id}}}) {
+    pickup_orders(where: {id: {_eq: ${req.query.order_id}}}) {
       customer_name
-      customer_phone_number
       order_items {
         notes
         menu_item {
@@ -21,8 +20,9 @@ module.exports = async ( req, res ) => {
       query: get_order_gql
     })
   )
-  const current_order = hasura_response.data.data
-  let order_total = calcOrderTotal(current_order.order_items)
+  const current_order = hasura_response.data.data.pickup_orders[0]
+
+  const order_total = calcOrderTotal(current_order.order_items)
   let order_details = ''
 
   current_order.order_items.forEach((item, i) => {

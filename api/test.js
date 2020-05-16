@@ -1,6 +1,7 @@
 const axios = require('axios').default;
 
 module.exports = async ( req, res ) => {
+  const order_id = req.query.order_id
   const get_order_gql = `query getCurrentOrder {
     pickup_orders(where: {id: {_eq: ${req.query.order_id}}}) {
       customer_name

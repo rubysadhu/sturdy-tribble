@@ -46,7 +46,7 @@
       </div>
       <h2 class="text-3xl font-medium mb-2">How to Use</h2>
       <p class="mb-12 text-lg text-gray-600">Here's how to use the online ordering system. You (store owner) can use this app to monitor and process online orders.</p>
-      <div class="flex">
+      <div class="flex mb-6">
         <div class="w-1/3">
           <h3 class="font-bold text-xl mb-2">Kitchen</h3>
           <p class="mb-3 text-gray-600">View pending orders, confirm or communicate with customers and process the order using the Kanban workflow.</p>
@@ -60,6 +60,10 @@
           <p class="mb-3 text-gray-600">Search and manage all of the past orders to pull any information on any order in seconds.</p>
         </div>
       </div>
+
+      <p class="text-sm text-gray-600 mb-3">Hasura Database: https://hasura-3udj.onrender.com/console/data/schema/public</p>
+      <p class="text-sm text-gray-600 mb-3">Vercel Web Hosting: https://vercel.com/monetizedesign/super-duper-rotary-phone-2</p>
+      <p class="text-sm text-gray-600 mb-3">Twilio SMS: https://www.twilio.com/</p>
     </div>
 
   </div>
