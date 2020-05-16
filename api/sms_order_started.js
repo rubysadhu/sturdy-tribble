@@ -25,8 +25,8 @@ module.exports = async ( req, res ) => {
   let order_total = calcOrderTotal(current_order.order_items)
   let order_details = ''
 
-  current_order.order_items.menu_item.forEach((item, i) => {
-    order_details += `- 1  ${item.name}\n`
+  current_order.order_items.forEach((item, i) => {
+    order_details += `- 1  ${item.menu_item.name}\n`
   })
 
   const message = `Thanks for your order, ${current_order.customer_name},
