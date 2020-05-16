@@ -20,10 +20,12 @@ module.exports = async ( req, res ) => {
   )
   const current_order = hasura_response.data.data
 
-  const order_total = calcOrderTotal(current_order.order_items)
-  let order_details = ''
+  res.json({result: current_order})
 
-  console.log(current_order)
+  // const order_total = calcOrderTotal(current_order.order_items)
+  // let order_details = ''
+  //
+  // console.log(current_order)
   // current_order.order_items.forEach((item, i) => {
   //   order_details += `- 1  ${item.menu_item.name}\n`
   // })
@@ -48,9 +50,8 @@ module.exports = async ( req, res ) => {
 //
 // Mannette,
 // SoupChef`
-res.json({result: current_order})
+// res.json({result: current_order})
 }
-
 
 function calcOrderTotal(order_items) {
   let total = 0
